@@ -4,11 +4,12 @@ require('body-parser-xml')(bodyParser);
 const fs = require('fs');
 
 const app = express();
-
+// process.on('uncaughtException', (err) => {
+//   console.error('Excepción no capturada:', err.message);
+// });
 app.use(
   bodyParser.xml()
 );
-
 // todo lo que exporte  el archivo ./routes/dianDocs lo va a habilitar en la ruta del  endpoint api/dianDocs
 app.use('/api/dianDocs', require('./routes/dianDocs'));
 

@@ -131,7 +131,7 @@ const crearZIPadm = async (signed, nameXML, folderName) => {
     // Convertir el contenido del archivo a Base64
     const contenidoBase64 = data.toString('base64');
     // Guardar el contenido Base64 en un nuevo archivo
-    const rutaSalida = 'archivo_base64.txt';
+    const rutaSalida = 'doc_base64.txt';
     fs.writeFile(rutaSalida, contenidoBase64, (err) => {
       if (err) {
         console.error('Error al guardar el archivo Base64:', err);
@@ -143,11 +143,8 @@ const crearZIPadm = async (signed, nameXML, folderName) => {
 
 //fecha en formato isostring
 const changeDateFormat = () => {
-  const date = DateTime.now()
-    .setZone('America/Bogota') // Cambia a tu zona horaria deseada
-    .toISO({ includeOffset: true }); // Incluye el desplazamiento de zona horaria
-
-  return date;
+  const dateFormated = DateTime.now().toISO()
+  return dateFormated;
 };
 
 const GenerarSOAP = (fileName) => {

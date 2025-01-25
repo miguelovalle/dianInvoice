@@ -10,6 +10,7 @@ const {
 } = require('../modulesBK/createXML');
 
 const { signfile } = require('../modulesBK/firmar');
+//const { signfile } = require('../modulesBK/signWithCert');
 
 //const { sendSoapRequest } = require('../modulesBK/envio');
 
@@ -65,7 +66,7 @@ const envioDian = async (req, res = response) => {
       default:
         break;
     }
-    
+
     // Actualizar el xml para firma con el CUFE y el softcode
     await actualizaCUFE(softCode, CUFE, tyeDoc);
     //await actualizaSoftCode(softCode, CUFE, tyeDoc);
@@ -77,11 +78,13 @@ const envioDian = async (req, res = response) => {
       consecutivo,
       init
     );
+
     // cambiar el formato de la fecha
-    const date = await changeDateFormat();
+    const dateFormated = await changeDateFormat();
 
     //firmar con la llave privada y actualizar nombre
-    const signed = await signfile(nameXML, date);
+    const signed = await signfile(nameXML, dateFormated);
+
     // comprimir en un zip el xml firmado y convertido en base64
     await crearZIPadm(signed, nameXML, folderName);
 
